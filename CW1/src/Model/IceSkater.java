@@ -1,7 +1,12 @@
-package CW1;
+package Model;
+
 //import java.util.ArrayList;
 //import java.util.List;
-public class IceSkate{
+public class IceSkater extends Competitor{
+	/*public IceSkater()
+	{
+		super()
+	}*/
   int[] Ashok= {2,2,2,5};
   
   
