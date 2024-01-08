@@ -3,24 +3,31 @@ package Model;
 //import java.util.ArrayList;
 //import java.util.List;
 public class IceSkater extends Competitor{
-	/*public IceSkater()
+	private   int[] scores;
+	public IceSkater(String name, String country, String gender, int competitorID, int age) 
 	{
-		super()
-	}*/
-  int[] Ashok= {2,2,2,5};
+		super(name,country,gender,competitorID,age);
+		scores=new int[4];
+		
+	}
+
   
   
   
   public int[] getScoreArray() {
-		 return Ashok;
+		 return scores;
 	 }
-  public double getOverAllScore() {
+  public void setScore(int[] score) {
+	  this.scores=score;
+  }
+  @Override
+  public double getOverallScore() {
 		double sum=0;
-		for (int i=0; i<Ashok.length; i++) {
-			sum+=Ashok[i];
+		for (int i=0; i<scores.length; i++) {
+			sum+=scores[i];
 		}
 		//return sum;
-		double avg= sum/Ashok.length;
+		double avg= sum/scores.length;
 	    return avg;
 	}  
   public String getFullDetails(int ID, String name, int age, double score, int level, String email, String category, String arr) {

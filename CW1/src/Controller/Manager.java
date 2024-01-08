@@ -1,77 +1,58 @@
 package Controller;
-
+import Model.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.util.ArrayList;
-import java.io.FileNotFoundException;
-import Model.Competitor;
+import java.util.*;
+import Model.IceSkater;
 
-public class Manager extends Competitor {
-	public static int totalScore;
-	public static double averageScore;
-	public void ManagerClass() {
-	  ArrayList<Competitor> competitors = new ArrayList<>();
-		
-	  try {
-		   FileReader fr = new FileReader("/Users/Dana/Downloads/RunCompetitor.csv");
-		BufferedReader br = new BufferedReader(fr);
-		
-		double highestAverageScore = Double.MIN_VALUE;
-		//Competitor highestScoringStudent = null;
-			while (br.ready()) {
-		
-			
-			String line= br.readLine();
-		
-         String[] columns = line.split(",");
-        for (String column : columns) {
-            System.out.print(column + " "); 
-        }
-        System.out.println();
-  
-        int id =  Integer.parseInt(columns[0]);
-        String name = columns[1] ;
-        int age = Integer.parseInt(columns[2]);
-        String gender = columns[3];
-        String country = columns[4];
+public class Manager {
+	private CompetitorList competitorList;
+	public Manager()
+	{
+		competitorList=new CompetitorList();
+	}
 
-        int iceSkate = Integer.parseInt(columns[5]);
-        int tennis = Integer.parseInt(columns[6]);
-        int athletics = Integer.parseInt(columns[7]);
-        int electronicGame = Integer.parseInt(columns[8]);
-        Competitor com= new Competitor( name, country, gender, id, age);
-       
-        competitors.add(com);
-        System.out.println("ID: " + id + ", Name: " + name + ", Age: " + age +
-                ", Gender: " + gender + ", Country: " + country +
-                ", IceSkate: " + iceSkate + ", Tennis: " + tennis + ", Athletics: " + athletics +", Electronic Game: "+ electronicGame);
-       // System.out.println();
-       totalScore = Competitor.calculateTotalScore(tennis,iceSkate,athletics,electronicGame);
-        System.out.println("Total Score for " + name + ": " + totalScore);
-       averageScore = totalScore/4.0;
-        System.out.println("Average Score for " + name + ": " + averageScore) ;
-        
-        if (averageScore > highestAverageScore) {
-            highestAverageScore = averageScore;
-           //highestScoringStudent= com;
-        }
-        System.out.println();
-       
-		} 
-	
-       System.out.println("Highest Average Score: " + highestAverageScore);
-       System.out.println();
-			
-        br.close();
-		
-		
-	  }catch(Exception e){
-			
-			System.out.println("Something went wrong");
-			
-			System.out.println(e.getMessage());
-			}  
-		}
-	  }
-	
 
+	public void readFromFile(String filePath) {
+	    try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+	        String line;
+	        br.readLine(); // Skip the header line
+
+	        while ((line = br.readLine()) != null) {
+	            String[] columns = line.split(","); // Assuming comma-separated values
+
+	            int ID = Integer.parseInt(columns[0]);
+	            String name = columns[1];
+	            int age = Integer.parseInt(columns[2]);
+	            String gender = columns[3];
+	            String country = columns[4];
+
+	            // Extract scores starting from index 5
+	            int[] scores = new int[columns.length - 5];
+	            for (int i = 0; i < scores.length; i++) {
+	                scores[i] = Integer.parseInt(columns[5 + i]);
+	            }
+
+	            // Creating an instance of IceSkater as a Competitor
+	            Competitor competitor = new IceSkater(name, country, gender, ID, age);
+	            competitor.setScore(scores);
+
+	            // Assuming you have a competitorList field in your Manager class
+	            competitorList.addCompetitor(competitor);
+
+	            // Displaying full details
+	            System.out.println(competitor.getFullDetails());
+	        }
+	    } catch (Exception e) {
+	        System.out.println("Something went wrong");
+	        e.printStackTrace();
+	    }
+	}
+	public ArrayList<Competitor> getAllCompetitors()
+	{
+		return competitorList;
+	}
+
+
+
+}

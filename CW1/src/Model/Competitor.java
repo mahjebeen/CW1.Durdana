@@ -1,7 +1,5 @@
 package Model;
-//import java.util.ArrayList; 
-
-public class Competitor {
+public abstract class Competitor {
 	
 	private String name, category, country, gender;
 	private int  competitorID, age;
@@ -15,24 +13,17 @@ public class Competitor {
 
 
 	public Competitor(String name, String country, String gender, int competitorID, int age) {
-		//super();
 		this.name = name;
 		this.country = country;
 		this.gender = gender;
 		this.competitorID = competitorID;
 		this.age = age;
 	}
-
-
-
-	/*
-	 * public Competitor(int competitorID, String name) { super(); this.competitorID
-	 * = competitorID; this.name = name; }
-	 * 
-	 * 
-	 * public Competitor(String name, int competitorID, int level) { //super();
-	 * this.name = name; this.competitorID = competitorID; this.level = level; }
-	 */
+	public  double getOverallScore()
+	{
+		return 5;
+	}
+	public abstract void setScore(int[] score) ;
 	 
  public String getName() {
 		return name;
@@ -82,28 +73,24 @@ public class Competitor {
 	}
 
 
-	public String getFullDetails(int competitorID)
-	//(int ID, String name, int age, double score, int level, String email, String category, String arr)
-	//after aged (and was given score:%s)
-	{
-		return String.format("Competitor number:%d, name:%s.\n%s is aged %d, gender: %s from %s and has a overall score of %.2f.", competitorID, getName(), getName(), this.age, this.gender, getCountry(), CompetitorList.averageScore);//score );
+	public String getFullDetails() {
+	    return "Competitor number: " + competitorID + ", name: " + getName() +
+	           ".\n" + getName() + " is aged " + age + ", gender: " + gender +
+	           " from " + getCountry() + " and has an overall score of " +
+	           String.format("%.2f",getOverallScore()) + ".";
+	}
 
-		//return String.format("Competitor number:%d, category:%s name:%s, email:%s. \n %s is a level %d aged %d and was given score:%s and has a overall score of %.1f.", competitorID, category, name, email, name,level, age, arr, score );
+	public String getShortDetails() {
+	    return "CN " + competitorID + " (" + Name.getInitials(name) + ") has an overall score " + String.format("%.2f", CompetitorList.averageScore);
 	}
-	public String getShortDetails(int competitorID) {
-		//Score sc= new Score();
-		
-		return String.format("CN %d (%s) has overall score %.2f" , competitorID, Name.getInitials(name), CompetitorList.averageScore);//sc.getOverAllScore());//overAllScore
-	}
-	
-	public static int calculateTotalScore(int tennis, int iceSkate, int athletics, int electronicGame) {
+
+	public static int calculateTotalScore(int l1, int l2, int l3, int l4) {
 	       
-        return tennis+ iceSkate+athletics+electronicGame;
+        return l1+l2+l3+l4;
     }
-	//int ID, String name, double overallscore
+
+
+
+
 	
-	/*public static String getInitials(String fullName) {
-		int idxLastWhitespace = fullName.lastIndexOf(' ');
-        return fullName.charAt(0) + fullName.substring(idxLastWhitespace + 1, idxLastWhitespace + 2);
-    }  */
 }
