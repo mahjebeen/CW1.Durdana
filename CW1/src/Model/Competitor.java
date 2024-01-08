@@ -74,14 +74,15 @@ public abstract class Competitor {
 
 
 	public String getFullDetails() {
-	    return "Competitor number: " + competitorID + ", name: " + getName() +
+	    System.out.println();
+		return "Competitor number: " + competitorID + ", name: " + getName() +
 	           ".\n" + getName() + " is aged " + age + ", gender: " + gender +
 	           " from " + getCountry() + " and has an overall score of " +
 	           String.format("%.2f",getOverallScore()) + ".";
 	}
 
 	public String getShortDetails() {
-	    return "CN " + competitorID + " (" + Name.getInitials(name) + ") has an overall score " + String.format("%.2f", CompetitorList.averageScore);
+	    return "CN " + competitorID + " (" + Name.getInitials(name) + ") has an overall score " + String.format("%.2f", getOverallScore()) + ".";
 	}
 
 	public static int calculateTotalScore(int l1, int l2, int l3, int l4) {
@@ -94,3 +95,4 @@ public abstract class Competitor {
 
 	
 }
+
