@@ -6,7 +6,7 @@ public class Competitor {
 	private String name, email, category;
 	private int competitorID, DoB, level, age;
 	// private ArrayList<score> scores;
-	int[] score= {2,3,2,5,4};
+	int[] score= new int[3];
 	
 	 public Competitor() {
 		
@@ -86,6 +86,10 @@ public class Competitor {
 	public String getShortDetails(int ID, String name, double overallscore) {
 		return String.format("CN %d (%s) has overall score %.1f" , ID, getInitials(name), overallscore);
 	}
+	 public static int calculateTotalScore(int tennis, int iceSkate, int athletics, int electronicGame) {
+	       
+	        return tennis+ iceSkate+athletics+electronicGame;
+	    }
 	public static String getInitials(String fullName) {
 		int idxLastWhitespace = fullName.lastIndexOf(' ');
         return fullName.charAt(0) + fullName.substring(idxLastWhitespace + 1, idxLastWhitespace + 2);

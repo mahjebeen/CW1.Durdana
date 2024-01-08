@@ -2,7 +2,7 @@ package CW1;
 //import java.util.ArrayList;
 //import java.util.List;
 public class IceSkate{
-  int[] Ashok= {2,2,2,5,4};
+  int[] Ashok= {2,2,2,5};
   
   
   
