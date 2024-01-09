@@ -24,8 +24,8 @@ public class CompetitorList{
 	{
 		return this.competitors;
 	}
-	
-	 
-	
+
 }
+
+
 

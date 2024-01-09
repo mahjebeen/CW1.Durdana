@@ -1,7 +1,6 @@
 package Model;
 
-//import java.util.ArrayList;
-//import java.util.List;
+
 public class IceSkater extends Competitor{
 	private   int[] scores;
 	public IceSkater(String name, String country, String gender, int competitorID, int age) 
@@ -11,9 +10,6 @@ public class IceSkater extends Competitor{
 		
 	}
 
-  
-  
-  
   public int[] getScoreArray() {
 		 return scores;
 	 }
@@ -26,7 +22,7 @@ public class IceSkater extends Competitor{
 		for (int i=0; i<scores.length; i++) {
 			sum+=scores[i];
 		}
-		//return sum;
+	
 		double avg= sum/scores.length;
 	    return avg;
 	}  

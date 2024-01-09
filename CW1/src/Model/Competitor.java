@@ -6,7 +6,8 @@ public abstract class Competitor {
 	
 	int[] score= new int[3];
 	
-	 public Competitor() {
+	
+	public Competitor() {
 		
 	}
 	 
@@ -71,6 +72,9 @@ public abstract class Competitor {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
+	 public int[] getScore() {
+			return score;
+		}
 
 
 	public String getFullDetails() {
@@ -82,17 +86,12 @@ public abstract class Competitor {
 	}
 
 	public String getShortDetails() {
-	    return "CN " + competitorID + " (" + Name.getInitials(name) + ") has an overall score " + String.format("%.2f", getOverallScore()) + ".";
+	    return "CN: " + competitorID + " (" + Name.getInitials(name) + ") has an overall score " + String.format("%.2f", getOverallScore()) + ".";
 	}
 
 	public static int calculateTotalScore(int l1, int l2, int l3, int l4) {
 	       
         return l1+l2+l3+l4;
     }
-
-
-
-
 	
 }
-

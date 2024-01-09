@@ -1,7 +1,10 @@
 package Controller;
 import Model.*;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 
 public class Manager {
@@ -43,6 +46,41 @@ public class Manager {
 	        e.printStackTrace();
 	    }
 	}
+	
+	public void writeToFile(String filePath) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath))) {
+            // Writing header line
+            bw.write("ID,Name,Age,Gender,Country,Score1,Score2,Score3,Score4\n");
+
+            // Writing competitor details
+            for (Competitor competitor : competitorList.getAllCompetitors()) {
+            	int[] scores = competitor.getScore();
+            	bw.write(String.format("%d,%s,%d,%s,%s,%d,%d,%d,%d\n",
+                        competitor.getCompetitorID(),
+                        competitor.getName(),
+                        competitor.getAge(),
+                        competitor.getGender(),
+                        competitor.getCountry()));
+                        for (int i = 0; i < 4; i++) {
+                            bw.write("," + (i < scores.length ? scores[i] : 0));
+                        }
+                        bw.write("\n");
+            }
+
+            System.out.println("Competitors' information written to file successfully.");
+        } catch (IOException e) {
+            System.out.println("Error writing to file.");
+            e.printStackTrace();
+        }
+    }
+	 public Competitor getCompetitorByNumber(int competitorNumber) {
+	        for (Competitor competitor : competitors) {
+	            if (competitor.getCompetitorID() == competitorNumber) {
+	                return competitor;
+	            }
+	        }
+	        return null; // Return null if no competitor with the specified number is found
+	    }
 	public ArrayList<Competitor> getAllCompetitors()
 	{
 	
